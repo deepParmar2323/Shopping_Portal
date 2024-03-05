@@ -7,33 +7,33 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.shopping.project.entity.Home;
+import com.shopping.project.entity.Admin;
 
 public class CustomUser implements UserDetails {
 
-	private Home home;
+	private Admin admin;
 
-	public CustomUser(Home home) {
+	public CustomUser(Admin admin) {
 		super();
-		this.home = home;
+		this.admin = admin;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(home.getRole());
+		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(admin.getRole());
 		return Arrays.asList(authority);
 	}
 
 	@Override
 	public String getPassword() {
 
-		return home.getPassword();
+		return admin.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
 
-		return home.getUsername();
+		return admin.getUsername();
 	}
 
 	@Override

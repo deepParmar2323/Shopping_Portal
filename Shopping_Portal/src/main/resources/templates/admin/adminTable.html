@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" layout:decorate="~{layout/baseLayout}">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bootstrap demo</title>
+
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Data Tables</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a th:href="@{/index}">Home</a></li>
+						<li class="breadcrumb-item"><a th:href="@{/admin/DataTable}">Tables</a></li>
+						<li class="breadcrumb-item active">Data</li>
+					</ol>
+				</nav>
+			</div><!-- End Page Title -->
+
+			<section class="section">
+				<div class="row">
+					<div class="col-lg-12">
+
+						<div class="card">
+							<div class="card-body">
+
+								<a th:href="@{/AdminSignup}" type="button" class="btn btn-primary btn-sm mt-2"> Add
+									User</a>
+
+								<h5 class="card-title">Datatables</h5>
+
+
+								<div th:insert="~{admin/table.html}"></div>
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+		</main><!-- End #main -->
+	</div>
+
+</body>
+
+</html>

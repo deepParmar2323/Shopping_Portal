@@ -2,6 +2,8 @@ package com.shopping.project.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -10,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableJpaAuditing(auditorAwareRef = "auditorProvider")
 public class SecurityConfig {
 
 	@Bean
@@ -32,13 +35,16 @@ public class SecurityConfig {
 	}
 
 	@Bean
+	AuditorAware<String> auditorProvider() {
+		return new AuditorAwareImpl();
+	}
+
+	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeHttpRequests()
-				.requestMatchers("/", "/signup", "/registerUser", "/vendor/**", "/img/**", "/index", "/css/**",
-						"/js/**")
-				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login").loginProcessingUrl("/login")
-				.defaultSuccessUrl("/index", true).failureUrl("/invalid").permitAll().and().logout()
-				.logoutSuccessUrl("/userLogout").permitAll();
+				.requestMatchers("/signup", "/registerUser", "/vendor/**", "/img/**", "/css/**", "/js/**").permitAll()
+				.anyRequest().authenticated().and().formLogin().loginPage("/login").loginProcessingUrl("/login")
+				.defaultSuccessUrl("/index", true).failureUrl("/invalid").permitAll().and().logout().permitAll();
 
 		return http.build();
 	}

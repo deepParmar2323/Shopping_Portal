@@ -6,19 +6,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Login</title>
 
-
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+	<script src="https://cdn.datatables.net/2.0.1/js/dataTables.js" language="JavaScript"></script>
 	<!-- Favicons -->
-	<link th:href="@{/static/img/favicon.png}" rel="icon">
-	<link th:href="@{/static/img/apple-touch-icon.png}" rel="apple-touch-icon">
+	<link th:href="@{/img/favicon.png}" rel="icon">
+	<link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon">
 
 	<!-- Google Fonts -->
 	<link th:href="@{https://fonts.gstatic.com}" rel="preconnect">
 	<link
 		th:href="@{https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i}"
-		rel="stylesheet}">
-	<link
-		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
 		rel="stylesheet">
+
 	<!-- Vendor CSS Files -->
 
 	<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
@@ -28,6 +27,7 @@
 	<link th:href="@{/vendor/quill/quill.bubble.css}" rel="stylesheet">
 	<link th:href="@{/vendor/remixicon/remixicon.css}" rel="stylesheet">
 	<link th:href="@{/vendor/simple-datatables/style.css}" rel="stylesheet">
+	<link th:href="@{https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.css}" rel="stylesheet">
 
 	<!-- Template Main CSS File -->
 	<link th:href="@{/css/style.css}" rel="stylesheet">
@@ -35,7 +35,16 @@
 </head>
 
 <body>
+
+	<div th:if="${login_user_detail != null}">
+		<div th:replace="~{fragments/header :: myheader}"></div>
+	</div>
+
+	<div th:insert="~{fragments/sidebar :: mysidebar}" th:if="${login_user_detail != null}"></div>
+
 	<div layout:fragment="content"></div>
+
+	<div th:insert="~{fragments/footer :: myfooter}" th:if="${login_user != null}"></div>
 
 	<!-- Vendor JS Files -->
 	<script src="/vendor/apexcharts/apexcharts.min.js"></script>
@@ -46,9 +55,10 @@
 	<script src="/vendor/simple-datatables/simple-datatables.js"></script>
 	<script src="/vendor/tinymce/tinymce.min.js"></script>
 	<script src="/vendor/php-email-form/validate.js"></script>
-
 	<!-- Template Main JS File -->
 	<script src="/js/main.js"></script>
+
+
 
 </body>
 

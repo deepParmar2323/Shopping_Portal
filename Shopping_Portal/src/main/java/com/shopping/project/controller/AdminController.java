@@ -15,7 +15,7 @@ import com.shopping.project.entity.Admin;
 import com.shopping.project.service.AdminService;
 
 @Controller
-public class HomeController {
+public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
@@ -31,35 +31,18 @@ public class HomeController {
 
 	}
 
-	@GetMapping("/try")
-	public String tryy() {
-		return "try";
-	}
-
-	@GetMapping("/index")
-	public String index() {
-		return "index";
-	}
-
-	@GetMapping("/login")
-	public String login() {
-
-		return "login";
-	}
-
-	@GetMapping("/invalid")
-	public String error() {
-		return "error";
-	}
-
-	@GetMapping("/signup")
-	public String SignUp(Model model, Admin admin) {
+	@GetMapping("/AdminSignup")
+	public String AdminSignup(Model model, Admin admin) {
 		model.addAttribute("admin", admin);
-
-		return "signup";
+		return "admin/AdminSignup";
 	}
 
-	@PostMapping("/registerUser")
+	@GetMapping("/admin/DataTable")
+	public String AdminDataTable() {
+		return "admin/adminTable";
+	}
+
+	@PostMapping("/admin/register")
 	public String registerUser(Admin admin) {
 
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -68,6 +51,7 @@ public class HomeController {
 
 		adminService.save(admin);
 
-		return "redirect:/login";
+		return "redirect:/admin/DataTable";
 	}
+
 }
